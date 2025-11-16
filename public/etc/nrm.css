@@ -1,0 +1,947 @@
+/* Fonts */
+@font-face {
+  font-family: alegreya;
+  src: local('Alegreya SC'), url('alegreyasc.woff2') format('woff2'),
+    url('alegreyasc.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: source;
+  src: local('Source Sans Pro'), url('sourcesanspro.woff2') format('woff2'),
+    url('sourcesanspro.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+body,
+code,
+input,
+textarea,
+button {
+  font: normal 1rem/1.4 source, sans-serif;
+}
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+  outline: 0;
+}
+html {
+  width: 100%;
+  scroll-behavior: smooth;
+  scroll-padding-top: 7em;
+  padding: 0 1vw;
+}
+html,
+body {
+  margin: auto;
+  min-height: 100vh;
+}
+header,
+body {
+  max-width: 81em;
+}
+header {
+  padding: 0 0.4em;
+}
+body {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1.5em;
+}
+header {
+  max-width: 81em;
+  margin: auto;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: middle;
+}
+header:before,
+header:after,
+footer:before,
+footer:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100vw;
+  right: 100%;
+}
+header:after,
+footer:after {
+  left: 100%;
+}
+main {
+  margin-top: 7em;
+}
+main {
+  hyphens: auto;
+  flex: 1 1;
+}
+aside {
+  margin-top: 11em;
+  flex: 0 0 300px;
+}
+footer {
+  flex: 1 1 100%;
+  position: sticky;
+  contain: layout;
+  margin-top: auto;
+  padding: 0.2em 0;
+}
+.fw {
+  flex: 1 1 100%;
+}
+.hw {
+  flex: 0 1 48%;
+}
+.tw {
+  flex: 0 1 30%;
+}
+div.tele {
+  margin-top: 7em;
+}
+main.tele {
+  margin-top: 0;
+}
+aside.tele {
+  margin-top: 4.6em;
+}
+/* Header */
+nav {
+  align-self: center;
+  position: relative;
+}
+nav button {
+  cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 1.1em;
+  border: 2px solid;
+}
+nav li ul {
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+nav ul,
+nav li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+nav li a {
+  display: block;
+  text-decoration: none;
+  padding: 0.2em 0.5em;
+}
+nav li:hover > ul,
+nav li:focus-within > ul {
+  display: flex;
+  flex-flow: row wrap;
+}
+nav ul li {
+  width: 100%;
+}
+nav li ul li {
+  border-bottom: thin dashed;
+}
+nav li ul li:last-child {
+  border-bottom: none;
+}
+/*Texts*/
+article p {
+  text-indent: 1.5em;
+}
+.s,
+.s p {
+  text-indent: 0;
+}
+.c {
+  text-indent: 0;
+  text-align: center;
+}
+.r {
+  text-align: right;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: alegreya;
+  font-size: 1.8em;
+}
+h2,
+.h2 {
+  font-size: 1.5em;
+}
+h3,
+.h3 {
+  font-size: 1.3em;
+}
+h4,
+h5,
+h6,
+.h4,
+.h5,
+.h6 {
+  font-size: 1.1em;
+}
+h5,
+.h5 {
+  font-weight: bold;
+}
+h6,
+.h6 {
+  font-style: italic;
+}
+b,
+strong {
+  font-weight: bold;
+}
+i,
+em,
+ins {
+  font-style: italic;
+}
+s,
+del {
+  font-style: oblique;
+}
+abbr {
+  cursor: help;
+}
+article a,
+aside a {
+  text-decoration-skip-ink: auto;
+  text-decoration-thickness: 1.5px;
+}
+article a:focus,
+article a:hover,
+aside a:focus,
+aside a:hover {
+  text-decoration-skip-ink: none;
+  transition: all 0.5s ease-out;
+}
+mark {
+  padding: 0.1em;
+}
+dfn,
+article p span {
+  font-style: normal;
+  font-variant: small-caps;
+}
+details {
+  padding: 0 0.5em 0.5em;
+}
+details summary {
+  margin: 0 -0.5em;
+  padding: 0.5em;
+  cursor: pointer;
+}
+small {
+  font-size: 0.8em;
+}
+sup,
+sub {
+  font-size: 0.65em;
+}
+code {
+  padding: 0.2em;
+}
+blockquote {
+  max-width: 100%;
+  border-left: thick solid;
+  padding-left: 0.5em;
+}
+blockquote p {
+  text-indent: 0;
+}
+pre {
+  white-space: pre-wrap;
+  margin: 0.7em 0;
+}
+pre code {
+  display: block;
+}
+q [lang='es'] {
+  quotes: '\00ab''\00bb';
+}
+article ul {
+  list-style-type: square;
+}
+hr {
+  border: 0;
+  border-bottom: thin solid;
+}
+dl {
+  margin: 1.2em 0;
+}
+dl hr {
+  margin: 1.2em 0;
+  border: thin dashed;
+}
+/*Tables*/
+table {
+  width: 90%;
+  margin: auto;
+}
+tr {
+  display: flex;
+  flex-flow: row wrap;
+  margin: 0.25em 0;
+}
+th,
+td {
+  border: thin solid;
+  flex: 1 1 0;
+  padding: 0.25em;
+}
+/*Images*/
+figure::backdrop,
+img::backdrop {
+  background-color: rgba(0, 0, 0, 0.9);
+}
+button:has(figure, picture, img) {
+  margin: 0;
+  padding: 0;
+  border: 2px solid transparent;
+  cursor: pointer;
+  background: transparent;
+}
+button:has(figure, picture, img):hover,
+button:has(figure, picture, img):focus {
+  border: 2px solid;
+}
+picture {
+  display: flex;
+}
+.li {
+  max-width: 40%;
+  float: left;
+  margin: 0 0.7em 0 0;
+}
+.ri {
+  max-width: 40%;
+  float: right;
+  margin: 0 0 0 0.7em;
+}
+figure,
+picture,
+img {
+  max-width: 100%;
+  height: fit-content;
+  border: 0;
+  padding: 0;
+  margin: 0 auto;
+}
+article figcaption {
+  text-align: center;
+  font-size: 0.85em;
+}
+article > picture,
+article > img {
+  display: block;
+  margin: auto;
+}
+.pics {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  gap: 0.5em;
+  padding: 0;
+}
+.pics li {
+  list-style: none;
+  flex: 1 1 content;
+  display: flex;
+  justify-content: center;
+}
+.pics li button {
+  align-self: center;
+}
+.pics li picture * {
+  max-height: 250px;
+}
+/* Lightbox */
+figure[popover],
+.pics li figure[popover] picture * {
+  padding: 0;
+  border: 0;
+  max-width: 90vw;
+  max-height: 90vh;
+  margin: auto;
+}
+/*Audio and video*/
+audio {
+  display: block;
+  border: none;
+  margin: 0.7em auto;
+}
+video,
+iframe {
+  display: block;
+  max-width: 100%;
+  height: auto;
+  border: none;
+  margin: 0.7em auto;
+}
+.ar169 {
+  width: 100%;
+  aspect-ratio: 16/9;
+}
+.ar43 {
+  width: 100%;
+  aspect-ratio: 4/3;
+}
+.ar11 {
+  width: 100%;
+  aspect-ratio: 1/1;
+}
+/*Cards*/
+.cards dl {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1.5em;
+}
+.cards div {
+  border: 2.5px solid;
+  flex: 1 1 30%;
+  padding: 0.75em;
+  border-radius: 14px;
+}
+/*Note*/
+#note {
+  position: absolute;
+  bottom: 1%;
+  right: 1%;
+  animation: chao 4s ease-in 1s forwards;
+  border-radius: 7px;
+}
+#note p {
+  margin: 0.2em 0.5em;
+}
+@keyframes chao {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+/*Forms*/
+form {
+  margin: 1em auto;
+  padding: 1em;
+  border: 2.5px solid;
+}
+form ul {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-between;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+form li {
+  flex: 0 1 48%;
+  margin: 0.3em 0;
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+  justify-content: space-between;
+}
+form input,
+form textarea {
+  flex: 1 1 100%;
+  border: 0;
+  padding: 0;
+  border-bottom: thin solid;
+}
+form input:hover,
+form input:focus {
+  border-bottom-width: 2px;
+}
+form textarea {
+  resize: vertical;
+  margin: 0.3em 0;
+  height: 12em;
+  border: thin solid;
+}
+form textarea:focus {
+  border: 2px solid;
+}
+form input[type='checkbox'],
+form input[type='radio'] {
+  appearance: none;
+  position: absolute;
+  opacity: 0;
+  z-index: -1;
+}
+form input[type='checkbox'] + label,
+form input[type='radio'] + label {
+  display: flex;
+  align-items: center;
+  padding: 0.5rem 0.5rem 0.5rem 2rem;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.25, 0.25, 0.5, 1.9);
+}
+form input[type='checkbox'] + label:before,
+form input[type='radio'] + label:before {
+  content: '';
+  position: absolute;
+  left: 0;
+  width: 1.5rem;
+  height: 1.5rem;
+  background: transparent;
+  border: 2px solid;
+  border-radius: 0.25rem;
+  z-index: -1;
+  transition: all 0.25s cubic-bezier(0.25, 0.25, 0.5, 1.9);
+}
+form input[type='radio'] + label::before {
+  border-radius: 2rem;
+}
+form input[type='checkbox']:checked + label,
+form input[type='radio']:checked + label {
+  padding-left: 0.5em;
+}
+form input[type='checkbox']:checked + label::before,
+form input[type='radio']:checked + label::before {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  box-shadow: 0 0 0.5rem rgba(0, 0, 0, 0.5);
+}
+form fieldset {
+  border: 1px solid;
+  display: flex;
+  flex-flow: row wrap;
+  gap: 0.5em;
+}
+.float label,
+.float input {
+  flex: 1 1;
+  max-width: max-content;
+}
+.file {
+  display: block;
+  width: 100%;
+  position: relative;
+}
+.file input {
+  position: absolute;
+  margin: -1px;
+  width: 1px;
+  height: 1px;
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  overflow: hidden;
+}
+.file label {
+  visibility: hidden;
+}
+.file:before {
+  display: block;
+  white-space: nowrap;
+  cursor: pointer;
+  text-align: center;
+  padding: 0.3em;
+}
+.file:lang(en)::before {
+  content: 'Add the files…';
+}
+.file:lang(es)::before {
+  content: 'Añade los archivos…';
+}
+form input[type='color'] {
+  cursor: pointer;
+  flex: 0 0 30px;
+  max-width: unset;
+  border: 0;
+}
+form input[type='submit'] {
+  cursor: pointer;
+  border: 0;
+  height: 100%;
+  padding: 0.25em;
+}
+/*Aside*/
+aside button,
+aside a.button {
+  text-decoration: none;
+  padding: 0.2em 0.4em;
+  margin: 0.3em 0;
+  border: 0;
+  cursor: pointer;
+}
+aside form {
+  display: flex;
+  flex-flow: column;
+  max-width: 300px;
+  border: thin solid;
+  margin: 1em 0;
+  padding: 0.5em 1em 1em;
+}
+aside form input {
+  border-bottom: thin solid;
+  margin: 0.2em 0;
+}
+aside form input:focus {
+  border-width: 2px;
+}
+aside form input[type='submit'] {
+  cursor: pointer;
+}
+.icons {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+}
+
+@media screen and (max-width: 900px) {
+  main {
+    flex: 1 1 100%;
+  }
+  aside {
+    margin: auto;
+  }
+  form ul {
+    display: flex;
+    flex-direction: column;
+  }
+  .cards dl div {
+    flex: 1 1 45%;
+  }
+}
+
+@media screen and (min-width: 1601px) {
+  body,
+  input,
+  textarea,
+  button {
+    font-size: 1.1rem;
+  }
+  aside,
+  aside button {
+    font-size: 1em;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .pic {
+    float: none;
+    max-width: 300px;
+    margin: 0 auto;
+  }
+  tr {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    margin: 0.5em 0;
+    border: 1px solid rgba(3, 3, 3, 0.2);
+  }
+  td,
+  th {
+    flex: 1 1 150px;
+  }
+  .cards dl {
+    flex-flow: column nowrap;
+  }
+}
+
+#logo {
+  display: flex;
+  font: normal small-caps 2.4em/1.1em alegreya;
+  text-decoration: none;
+  padding: 0.3em 0;
+}
+#logo:hover,
+#logo:focus {
+  text-decoration: underline;
+}
+#logo img,
+#logo picture * {
+  margin: auto;
+}
+
+/* Colours */
+body {
+  background: #fff;
+}
+header,
+footer,
+header:before,
+footer:before,
+header:after,
+footer:after {
+  background: #a00;
+}
+#logo {
+  color: #fff;
+}
+#logo:hover,
+#logo:focus {
+  background: #800;
+}
+nav {
+  border-color: #fff;
+}
+nav button {
+  background: #a00;
+  color: #fff;
+}
+nav ul {
+  background: #a00;
+}
+nav li a {
+  color: #fff;
+}
+nav li ul li,
+nav li ul li:first-child {
+  border-color: #fff;
+}
+nav button:hover,
+nav button:focus,
+nav li a:hover,
+nav li a:focus {
+  background: #800;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  color: #000;
+}
+article a,
+aside a {
+  color: #800;
+  text-decoration-color: #800;
+}
+article a:hover,
+article a:focus,
+aside a:hover,
+aside a:focus {
+  background: #800;
+  color: #fff;
+}
+mark {
+  background: #68089e;
+  color: #fff;
+}
+details[open] {
+  background: #ededed;
+}
+details summary {
+  background: #a00;
+  color: #fff;
+}
+summary:focus {
+  background: #800;
+}
+code {
+  background-color: #f0f0f0;
+  color: #000;
+}
+blockquote {
+  border-color: #800;
+}
+hr {
+  color: #800;
+}
+th {
+  background: #800;
+  color: #f2daf2;
+}
+th,
+td {
+  border-color: #ddd;
+}
+tr:nth-child(even) {
+  background: #eee;
+}
+button:has(figure, picture, img):hover,
+button:has(figure, picture, img):focus {
+  border-color: #800;
+}
+form {
+  border-color: #800;
+}
+form input,
+form textarea,
+form textarea:focus {
+  border-color: #800;
+}
+form input[type='checkbox'] + label:before,
+form input[type='radio'] + label:before {
+  color: #800;
+}
+form input[type='checkbox']:checked + label::before,
+form input[type='radio']:checked + label::before {
+  background: #800;
+}
+form input[type='checkbox']:checked + label,
+form input[type='radio']:checked + label {
+  color: #fff;
+}
+form fieldset {
+  border-color: #68089e;
+}
+.file:before {
+  background: #a00;
+  color: #f2daf2;
+}
+form input[type='submit'] {
+  background: #a00;
+  color: #f2daf2;
+}
+form input[type='submit']:hover,
+form input[type='submit']:focus {
+  background: #800;
+}
+form input[type='color']:focus {
+  outline: thin solid red;
+}
+form input[type='checkbox'],
+form input[type='radio'] {
+  accent-color: #800;
+}
+form label:has(input[type='checkbox']:hover),
+form label:has(input[type='checkbox']:focus),
+form label:has(input[type='radio']:hover),
+form label:has(input[type='radio']:focus) {
+  background: #ededed;
+}
+.cards div {
+  border-color: #800;
+}
+aside form {
+  border-color: #800;
+}
+aside a.button,
+aside button {
+  background: #a00;
+  color: #fff;
+}
+aside a.button:hover,
+aside a.button:focus,
+aside button:hover,
+aside button:focus {
+  background: #800;
+}
+footer {
+  color: #fff;
+}
+#note {
+  color: #fff;
+  background: #800;
+}
+
+@media print {
+  @page {
+    margin: 2cm;
+  }
+  body {
+    width: 100%;
+    margin: 2cm;
+    margin: 0;
+    background: #fff;
+    color: #000;
+    font-size: 11pt;
+  }
+  body,
+  main {
+    width: auto;
+    display: block;
+    word-wrap: break-word;
+    margin-top: 0;
+  }
+  header,
+  aside,
+  footer,
+  form,
+  #note,
+  video,
+  audio,
+  iframe {
+    display: none;
+  }
+  section {
+    display: block;
+    margin: auto;
+  }
+  .pics {
+    display: block;
+  }
+  .pics figure {
+    display: inline-block;
+  }
+  figure {
+    break-inside: avoid;
+    margin: 0.5em auto;
+  }
+  h1,
+  h2,
+  h3 {
+    font: normal 18pt/1.2em fertigo, georgia, sans-serif;
+    color: #000;
+  }
+  h2 {
+    font-size: 1.4em;
+  }
+  h3 {
+    font-size: 1.3em;
+  }
+  h4,
+  h5,
+  h6 {
+    font-size: 1.1em;
+  }
+  a {
+    color: #000;
+    border: 0;
+    text-decoration: none;
+  }
+  a:after {
+    content: ' [https://URL/' attr(href) '] ';
+  }
+  a[href^="http://"]:after, a[href^="https://"]:after, a[href^="ftp://"]:after
+  {
+    content: ' [' attr(href) '] ';
+  }
+  a[href^='#']:after {
+    display: none;
+  }
+  abbr[title]:after {
+    content: ' (' attr(title) ') ';
+    border: 0;
+  }
+  hr {
+    border: none;
+    border-bottom: thin dashed #333;
+    clear: both;
+  }
+}

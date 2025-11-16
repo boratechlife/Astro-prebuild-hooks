@@ -7,17 +7,6 @@ import fs from 'fs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const TARGET_COMPONENT = 'src/components/articulos.astro';
-
-function shuffleArray(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    // Swap elements
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-  return array;
-}
-
 export default defineConfig({
   integrations: [
     {
@@ -143,90 +132,16 @@ export default defineConfig({
               componentExtensions.includes(path.extname(file))
             );
 
-            logger.info(`Found ${filteredFiles.length} component files.`);
-            logger.info(`Looking for component: ${TARGET_COMPONENT}`);
+            logger.info(`Found ${filteredFiles.length} component files:`);
 
-            // Read and log the content ONLY if it matches the target component
+            // Read and log each component file
             filteredFiles.forEach((filePath) => {
               try {
-                const relativePath = path
-                  .relative(process.cwd(), filePath)
-                  .replace(/\\/g, '/'); // Normalize path for cross-OS compatibility
+                const relativePath = path.relative(process.cwd(), filePath);
                 const content = fs.readFileSync(filePath, 'utf-8');
 
-                // 🔥 CRITICAL CHANGE HERE: Check if the relative path matches the target
-                // 2. Check if the relative path matches the target component
-                if (relativePath === TARGET_COMPONENT) {
-                  logger.info(`\n🚀 MATCH FOUND: ${relativePath} 🚀`);
-
-                  // 3. Read the original content of the file
-                  const originalContent = fs.readFileSync(filePath, 'utf-8');
-                  let modifiedContent = originalContent;
-
-                  // 4. Use Regex to capture the entire <dl>...</dl> block.
-                  // Group 1: <dl...> (start tag)
-                  // Group 2: inner content (what we want to process)
-                  // Group 3: </dl> (end tag)
-                  const dlRegex = /(<dl[^>]*>)([\s\S]*?)(<\/dl>)/i;
-                  const dlMatch = originalContent.match(dlRegex);
-
-                  if (dlMatch && dlMatch[2].trim().length > 0) {
-                    const dlStartTag = dlMatch[1];
-                    const dlInnerContent = dlMatch[2];
-                    const dlEndTag = dlMatch[3];
-                    const fullDlBlock = dlMatch[0];
-
-                    // 5. Extract the direct children <div>...</div> blocks, including surrounding whitespace.
-                    // The regex captures one or more whitespace chars (or none) followed by <div>...</div> and
-                    // followed by one or more whitespace chars (or none), capturing the entire block.
-                    // This is done globally (g) to get all matches as an array.
-                    const divRegex = /(\s*<div[\s\S]*?<\/div>\s*)/gi;
-                    const divs = dlInnerContent.match(divRegex) || [];
-
-                    if (divs.length > 0) {
-                      logger.info(
-                        `Found ${divs.length} direct children to shuffle.`
-                      );
-
-                      // 6. Shuffle the array of extracted div strings
-                      const shuffledDivs = shuffleArray(divs);
-
-                      // 7. Reconstruct the new inner content
-                      // We join the shuffled divs directly. Since the capturing regex included
-                      // the whitespace/newlines, the result should maintain readable formatting.
-                      const newInnerContent = shuffledDivs.join('');
-
-                      // 8. Reconstruct the new full <dl> block
-                      const newDlBlock = `${dlStartTag}${newInnerContent}${dlEndTag}`;
-
-                      // 9. Replace the old <dl> block with the new, shuffled block in the full file content
-                      modifiedContent = originalContent.replace(
-                        fullDlBlock,
-                        newDlBlock
-                      );
-
-                      // 10. Overwrite the file with the modified content
-                      fs.writeFileSync(filePath, modifiedContent, 'utf-8');
-
-                      logger.info(
-                        `✅ Component content modified and overwritten: ${relativePath}`
-                      );
-                      logger.info(
-                        `Direct children inside <dl> have been successfully randomized.`
-                      );
-                    } else {
-                      logger.warn(
-                        '⚠️ No <div> elements found inside <dl> to shuffle.'
-                      );
-                    }
-                  } else {
-                    logger.warn(
-                      '⚠️ Target component found, but no non-empty <dl>...</dl> block detected.'
-                    );
-                  }
-                } else {
-                  logger.info(`Checked file: ${relativePath} (Skipped)`);
-                }
+                logger.info(`\n=== Component: ${relativePath} ===`);
+                logger.info(`Contents:\n${content}\n`);
               } catch (error) {
                 logger.error(
                   `Error reading component file ${filePath}: ${error.message}`

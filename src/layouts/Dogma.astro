@@ -1,0 +1,59 @@
+---
+let { t, d, f } = Astro.props;
+---
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<link href="etc/alegreyasc.woff2" rel="preload" as="font">
+<link href="etc/sourcesanspro.woff2" rel="preload" as="font">
+<link href="etc/atkinson.woff2" rel="preload" as="font">
+<meta name="viewport" content="width=device-width">
+<link rel="icon" type="image/png" href="etc/icono.png">
+<link href="etc/nrm.css" rel="stylesheet" title="normal">
+<link href="etc/exl.css" rel="stylesheet" title="legible">
+<link rel="alternate" type="application/atom+xml" href="noticiero.xml">
+
+<title>{t}</title>
+<meta name="description" content={d}>
+</head>
+<body>
+<slot />
+<aside>
+<form action="inscripciones.php" method="post">
+<p class="c">Si te inscribes, recibirás novedades…</p>
+<input type="email" placeholder="coloca tu correo aquí" name="email" required>
+<input type="checkbox" name="read" value="yes" id="confirm" required>
+<label for ="confirm" class="c">Sí, leí el aviso de privacidad</label>
+<input type="submit" value="¡Agrégame a la lista!" name="submit">
+</form>
+<p class="c"><button onclick="setStyle('normal')">letra normal</button> <button onclick="setStyle('legible')">extra legible</button><br>
+<a class="button" href="javascript:;">aviso de privacidad</a></p>
+<hr>
+</aside>
+
+<footer>
+<p>«{t}» se revisó por última vez el {f}.</p>
+</footer>
+
+<header>
+<a id="logo" href="index.html"><img src="etc/unperumejor.svg" alt="Un mapa de Perú" width="50" height="50"> Un Perú mejor</a>
+<nav role="navigation">
+<ul>
+<li><button aria-haspopup="true">Más artículos aquí &nbsp; ☰</button>
+<ul aria-label="submenu" hidden>
+<li><a href="articulos.html">Todos los artículos</a></li>
+<li><a href="contacto.html">Contacto</a></li>
+</ul>
+</li>
+</ul>
+</nav>
+</header>
+
+<div id="note">
+<p>Esta página utiliza cookies, pero tranquilo que no te espío.</p>
+</div>
+
+<script type="text/javascript" src="etc/scripts.js" async></script>
+</body>
+</html>
