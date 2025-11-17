@@ -7,8 +7,8 @@ import fs from 'fs';
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const TARGET_COMPONENT = 'src/components/articulos.astro';
-
+// const TARGET_COMPONENT = 'src/components/articulos.astro';
+const SHUFFLE_MARKER = '<!-- SHUFFLE_DL_CHILDREN -->';
 function shuffleArray(array) {
   for (let i = array.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -104,7 +104,7 @@ export default defineConfig({
           console.log('astro:build:start hook called');
         },
         'astro:build:setup': ({ logger }) => {
-          logger.info('Reading all components in src/components directory...');
+          logger.info('Searching all components for marker: ' + SHUFFLE_MARKER);
 
           try {
             // Define the components directory path
@@ -144,7 +144,9 @@ export default defineConfig({
             );
 
             logger.info(`Found ${filteredFiles.length} component files.`);
-            logger.info(`Looking for component: ${TARGET_COMPONENT}`);
+            logger.info(
+              'Searching all components for marker: ' + SHUFFLE_MARKER
+            );
 
             // Read and log the content ONLY if it matches the target component
             filteredFiles.forEach((filePath) => {
@@ -156,11 +158,13 @@ export default defineConfig({
 
                 // 🔥 CRITICAL CHANGE HERE: Check if the relative path matches the target
                 // 2. Check if the relative path matches the target component
-                if (relativePath === TARGET_COMPONENT) {
-                  logger.info(`\n🚀 MATCH FOUND: ${relativePath} 🚀`);
+                if (content.includes(SHUFFLE_MARKER)) {
+                  logger.info(
+                    `\n🚀 MARKER FOUND. Processing: ${relativePath} 🚀`
+                  );
 
                   // 3. Read the original content of the file
-                  const originalContent = fs.readFileSync(filePath, 'utf-8');
+                  const originalContent = content;
                   let modifiedContent = originalContent;
 
                   // 4. Use Regex to capture the entire <dl>...</dl> block.
@@ -207,10 +211,7 @@ export default defineConfig({
 
                       // 10. Overwrite the file with the modified content
                       fs.writeFileSync(filePath, modifiedContent, 'utf-8');
-
-                      logger.info(
-                        `✅ Component content modified and overwritten: ${relativePath}`
-                      );
+                      logger.info(`✅ File Overwritten: ${relativePath}`);
                       logger.info(
                         `Direct children inside <dl> have been successfully randomized.`
                       );
@@ -221,11 +222,13 @@ export default defineConfig({
                     }
                   } else {
                     logger.warn(
-                      '⚠️ Target component found, but no non-empty <dl>...</dl> block detected.'
+                      '⚠️ Marker found, but no non-empty <dl>...</dl> block detected.'
                     );
                   }
                 } else {
-                  logger.info(`Checked file: ${relativePath} (Skipped)`);
+                  logger.info(
+                    `No marker found in Checked file: ${relativePath} (Skipped)`
+                  );
                 }
               } catch (error) {
                 logger.error(
